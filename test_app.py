@@ -34,5 +34,18 @@ class BoggleAppTestCase(TestCase):
         """Test starting a new game."""
 
         with self.client as client:
-            ...
+            resp = client.post('/api/new-game')
+            data = resp.get_json()
+
+            # How strong are these tests???
+            self.assertTrue(data["board"])
+            self.assertIsInstance(data["gameId"], str)
+            self.assertTrue(data["gameId"])
+            self.assertTrue(games)
+
+            print(data["gameId"])
+            print("RESPONSE", data)
+
+            # breakpoint()
+
             # write a test for this route
