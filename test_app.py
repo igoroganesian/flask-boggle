@@ -37,11 +37,14 @@ class BoggleAppTestCase(TestCase):
             resp = client.post('/api/new-game')
             data = resp.get_json()
 
-            # How strong are these tests???
-            self.assertTrue(data["board"])
+            self.assertIsInstance(data["board"], list)
+            self.assertTrue(type(data["board"][0]) == list)
+
             self.assertIsInstance(data["gameId"], str)
-            self.assertTrue(data["gameId"])
+
             self.assertTrue(games)
+
+            # self.assertIsInstance(games)
 
             print(data["gameId"])
             print("RESPONSE", data)
