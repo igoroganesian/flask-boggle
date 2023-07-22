@@ -39,9 +39,7 @@ class BoggleAppTestCase(TestCase):
 
             self.assertIsInstance(data["board"], list)
             self.assertTrue(type(data["board"][0]) == list)
-
             self.assertIsInstance(data["gameId"], str)
-
             self.assertTrue(games)
 
             # self.assertIsInstance(games)
@@ -52,3 +50,18 @@ class BoggleAppTestCase(TestCase):
             # breakpoint()
 
             # write a test for this route
+
+
+    def test_score_word(self):
+
+        # with app.test_client() as client:
+        #     resp = client.post('/api/new-game',json={'gameId': 'blue'})
+        #     data = resp.get_json()
+
+        with self.client as client:
+            resp = client.post('/api/new-game')
+            data = resp.get_json()
+
+            resp2 = client.post('/api/score-word', json={"gameId": data["gameId"]})
+
+            self.assertEqual({'message': 'blue is best!'}, data)

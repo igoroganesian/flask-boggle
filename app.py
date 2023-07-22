@@ -61,7 +61,8 @@ def score_word():
     word = request.json["word"]
     gameId = request.json["gameId"]
 
-    game = BoggleGame()
+    game = games[gameId]
+    # print(games[gameId])
 
     if not game.is_word_in_word_list(word):
         jsonify(result="not-word")
@@ -69,10 +70,3 @@ def score_word():
         jsonify(result="not-on-board")
     else:
         jsonify(result="ok")
-
-
-
-
-
-
-
