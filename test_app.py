@@ -62,6 +62,7 @@ class BoggleAppTestCase(TestCase):
             resp = client.post('/api/new-game')
             data = resp.get_json()
 
-            resp2 = client.post('/api/score-word', json={"gameId": data["gameId"]})
+            resp2 = client.post('/api/score-word', json={"gameId": data["gameId"], "word": "test"})
+
 
             self.assertEqual({'message': 'blue is best!'}, data)
